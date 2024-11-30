@@ -4,10 +4,10 @@ import { WebSocketServer } from 'ws';
 const PORT = 3001;
 const wss = new WebSocketServer({ port: PORT });
 
-const clients = new Set();
+const clients = new Map<any, any>();
 
 wss.on("connection", (ws:WebSocket) => {
-  clients.add(ws);
+  clients.set(ws, "");
   console.log("Client Connected");
 
   ws.on("close", () => {

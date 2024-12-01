@@ -25,6 +25,13 @@ wss.on("connection", (ws:WebSocket) => {
         message:`${data.username} has joined the chat`,
         timestamp: new Date().toISOString()
       }));
+    } else if(data.type === "message"){
+      broadcast(JSON.stringify({
+        type: 'message',
+        message: data.message,
+        username: clients.get(ws),
+        timestamp: new Date().toISOString()
+      }));
     }
   });
 
